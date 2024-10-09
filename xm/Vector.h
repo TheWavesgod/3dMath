@@ -6,38 +6,54 @@
 
 namespace xm
 {
-	class vec3
+	template <size_t N>
+	class vector
 	{
 	public:
-		union 
+		vector() { data.fill(0.0f); }
+
+		float operator [](int i) { return data[i]; }
+		float operator [](int i) const { return data[i]; }
+
+		std::array<float, N> data;
+	};
+
+	template <>
+	class vector<3>
+	{
+	public:
+		union
 		{
 			struct { float x, y, z; };
 			struct { float r, g, b; };
 			std::array<float, 3> data;
 		};
 
-		vec3() : x(0), y(0), z(0) {}
+		vector() : x(0), y(0), z(0) {}
 
-		vec3(float xVal, float yVal, float zVal) : x(xVal), y(yVal), z(zVal) {}
+		vector(float xVal, float yVal, float zVal) : x(xVal), y(yVal), z(zVal) {}
 
-		float& operator[](int i) { return data[i]; }
-		float operator[](int i) const { return data[i]; }
+		float operator [](int i) { return data[i]; }
+		float operator [](int i) const { return data[i]; }
 
-		vec3 operator-() const { return vec3(-x, -y, -z); }
-		vec3 operator+(const vec3& v) { return vec3(x + v.x, y + v.y, z + v.z); }
-		vec3 operator-(const vec3& v) { return vec3(x - v.x, y - v.y, z - v.z); }
+		vector<3> operator -() const { return vector<3>(-x, -y, -z); }
 
-		vec3 operator*(float k) const { return vec3(k * x, k * y, k * z); }
-		vec3 operator/(float k) const {
+		vector<3> operator +(const vector<3>& v) const { return vector<3>(x + v.x, y + v.y, z + v.z); }
+
+		vector<3> operator -(const vector<3>& v) const { return vector<3>(x - v.x, y - v.y, z - v.z); }
+
+		vector<3> operator *(float k) const { return vector<3>(k * x, k * y, k * z); }
+
+		vector<3> operator /(float k) const {
 			float oneOverK = 1 / k;
-			return vec3(oneOverK * x, oneOverK * y, oneOverK * z);
+			return vector<3>(oneOverK * x, oneOverK * y, oneOverK * z);
 		}
 
-		float operator*(const vec3& v) const { return x * v.x + y * v.y + z * v.z; }
+		float operator *(const vector<3>& v) const { return x * v.x + y * v.y + z * v.z; }
 
 		float length() { return sqrt(x * x + y * y + z * z); }
 
-		void normalized()
+		void nomalized()
 		{
 			float len = length();
 			if (len == 0) return;
@@ -48,13 +64,54 @@ namespace xm
 		}
 	};
 
-	float Dot(const vec3& A, const vec3& B) { return A.x * B.x + A.y * B.y + A.z * B.z; }
-
-	vec3 Cross(const vec3& A, const vec3& B)
+	template <>
+	class vector<4>
 	{
-		vec3 result;
-		result[0] = A[1] * B[2] - A[2] * B[1];
-		result[1] = A[2] * B[0] - A[0] * B[2];
-		result[2] = A[0] * B[1] - A[1] * B[0];
+	public:
+		union
+		{
+			struct { float x, y, z, w; };
+			std::array<float, 4> data;
+		};
+	};
+
+	template<size_t N>
+	vector<N> operator *(float k, const vector<N>& v)
+	{
+		vector<N> result;
+		for (size_t i = 0; i < N; ++i)
+		{
+			result.data[i] = k * v.data[i];
+		}
+		return result;
 	}
+
+	template<size_t N>
+	float Dot(const vector<N>& A, const vector<N>& B)
+	{
+		float result = 0;
+		for (size_t i = 0; i < N; ++i)
+		{
+			result += A.data[i] * B.data[i];
+		}
+		return result;
+	}
+
+	template<size_t N>
+	vector<N> Cross(const vector<N>& A, const vector<N>& B)
+	{
+		static_assert(N == 3, "Only vec3 can use Cross production.");
+		vector<N> result;
+		if constexpr (N == 3)
+		{
+			result[0] = A[1] * B[2] - A[2] * B[1];
+			result[1] = A[2] * B[0] - A[0] * B[2];
+			result[2] = A[0] * B[1] - A[1] * B[0];
+		}
+		return result;
+	}
+
+
+	using vec3 = vector<3>;
+	using vec4 = vector<4>;
 }
