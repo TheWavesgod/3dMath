@@ -16,5 +16,13 @@
     <ClInclude Include="Matrix.h">
       <Filter>Vector</Filter>
     </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Vector</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
