@@ -51,7 +51,7 @@ namespace xm
 
 		float operator *(const vector<3>& v) const { return x * v.x + y * v.y + z * v.z; }
 
-		float length() { return sqrt(x * x + y * y + z * z); }
+		float length() const { return sqrt(x * x + y * y + z * z); }
 
 		void nomalized()
 		{

@@ -19,6 +19,9 @@
     <ClInclude Include="Quaternion.h">
       <Filter>Vector</Filter>
     </ClInclude>
+    <ClInclude Include="mathUtil.h">
+      <Filter>Vector</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Quaternion.cpp">
