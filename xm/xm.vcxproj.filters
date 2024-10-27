@@ -5,27 +5,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Vector">
+    <Filter Include="xmath">
       <UniqueIdentifier>{b6cff7d9-c32f-4ee8-9f1c-cd21fbe24b1d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector.h">
-      <Filter>Vector</Filter>
+      <Filter>xmath</Filter>
     </ClInclude>
     <ClInclude Include="Matrix.h">
-      <Filter>Vector</Filter>
+      <Filter>xmath</Filter>
     </ClInclude>
     <ClInclude Include="Quaternion.h">
-      <Filter>Vector</Filter>
+      <Filter>xmath</Filter>
     </ClInclude>
     <ClInclude Include="mathUtil.h">
-      <Filter>Vector</Filter>
+      <Filter>xmath</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Quaternion.cpp">
-      <Filter>Vector</Filter>
+      <Filter>xmath</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

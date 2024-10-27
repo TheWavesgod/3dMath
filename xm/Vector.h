@@ -3,6 +3,7 @@
 #include <array>
 #include <stdexcept>
 #include <cmath>
+#include <iostream>
 
 namespace xm
 {
@@ -62,6 +63,27 @@ namespace xm
 			y *= oneOverlen;
 			z *= oneOverlen;
 		}
+
+		vector<3> projectTo(const vector<3>& tar) const
+		{
+			float dotResult = x * tar.x + y * tar.y + z * tar.z;
+			float squareTar = tar.x * tar.x + tar.y * tar.y + tar.z * tar.z;
+			return tar * (dotResult / squareTar);
+		}
+
+		vector<3> cross(const vector<3>& vec) const 
+		{
+			return vector<3>(
+				y * vec.z - z * vec.y,
+				z * vec.x - x * vec.z,
+				x * vec.y - y * vec.x
+			);
+		}
+
+		float dot(const vector<3>& vec) const
+		{
+			return x * vec.x + y * vec.y + z * vec.z;
+		}
 	};
 
 	template <>
@@ -111,7 +133,7 @@ namespace xm
 		return result;
 	}
 
-
+	using vec2 = vector<2>;
 	using vec3 = vector<3>;
 	using vec4 = vector<4>;
 }
