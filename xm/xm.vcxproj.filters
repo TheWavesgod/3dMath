@@ -22,9 +22,15 @@
     <ClInclude Include="mathUtil.h">
       <Filter>xmath</Filter>
     </ClInclude>
+    <ClInclude Include="GeometryPrimitive.h">
+      <Filter>xmath</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Quaternion.cpp">
+      <Filter>xmath</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryPrimitive.cpp">
       <Filter>xmath</Filter>
     </ClCompile>
   </ItemGroup>
